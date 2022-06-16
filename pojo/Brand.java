@@ -32,7 +32,6 @@ public class Brand {
         this.description = description;
         this.status = status;
     }
-
     public Integer getId() {
         return id;
     }
