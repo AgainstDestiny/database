@@ -23,6 +23,7 @@ public class Brand {
     //状态：0：禁用 1：启用
     private Integer status;
 
+    public Brand(){}
     public Brand(Integer id, String brandName, String companyName, Integer ordered, String description, Integer status) {
         this.id = id;
         this.brandName = brandName;

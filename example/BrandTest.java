@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,7 +31,7 @@ public class BrandTest {
      * 2.参数：目前不需要
      * 3.结果：List<Brand></>
      */
-    @Test
+@Test
     public void testSelectAll() throws Exception {
         //1.获取Connection
         Properties pro=new Properties();
@@ -46,6 +47,8 @@ public class BrandTest {
         //5.执行SQL
         ResultSet rs = pstmt.executeQuery();
         //6.处理结果 List<Brand> 封装Brand对象, 装载List集合
+        Brand brand=null;
+        List<Brand> brandList=new ArrayList<>();
         while (rs.next()){
             //获取数据
             String id = rs.getString("id");
@@ -55,22 +58,23 @@ public class BrandTest {
             String description = rs.getString("description");
             String status = rs.getString("status");
             //封装Brand对象
-            Brand brand=new Brand(Integer.valueOf(id), brandName, companyName, Integer.valueOf(ordered), description, Integer.valueOf(status));
+            brand=new Brand(Integer.valueOf(id), brandName, companyName, Integer.valueOf(ordered), description, Integer.valueOf(status));
             //装载集合
-            List<Brand> brandList=new ArrayList<Brand>();
             brandList.add(brand);
-            //打印查询结果集
-            for (Brand brands : brandList) {
-                System.out.println(brands);
-            }
+        }
+        //打印查询结果集
+        for (Brand brands : brandList) {
+            System.out.println(brands);
         }
         //7.释放资源
-        rs.close();
-        pstmt.close();
-        conn.close();
-
-
-
-
+        if (rs!=null) {
+            rs.close();
+        }
+        if (pstmt!=null) {
+            pstmt.close();
+        }
+        if (conn!=null) {
+            conn.close();
+        }
     }
 }
