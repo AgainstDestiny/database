@@ -32,8 +32,5 @@ public class DruidDemo {
         Connection connection = dataSource.getConnection();
 
         System.out.println(connection);
-
-
-
     }
 }
